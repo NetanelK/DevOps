@@ -1,3 +1,5 @@
+name: Build and push application to ecr
+
 on:
   workflow_dispatch:
   push:
@@ -21,12 +23,16 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
+        with:
+          registry-type: public
 
       - name: Build, tag, and push docker image to Amazon ECR
+        working-directory: ./app
         env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REGISTRY_ALIAS: l0s8g3f4
           REPOSITORY: flask-app
           IMAGE_TAG: ${{ github.ref_name }}
         run: |
-          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
-          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+          docker build -t $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG -t $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:latest .
+          docker push -a $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY
