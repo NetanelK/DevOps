@@ -15,3 +15,5 @@ A small Flask app that can be dockerize and deployed on any container environmen
 
 Terraform module that deploy infrastructure provisioned the flask app
 Module documentation is at [terraform/README.md](./terraform/README.md)
+
+<img src="./architecture.png" background-color="white" />
