@@ -1,3 +1,5 @@
+name: Build and push application to ecr
+
 on:
   workflow_dispatch:
   push:
@@ -33,4 +35,4 @@ jobs:
           IMAGE_TAG: ${{ github.ref_name }}
         run: |
           docker build -t $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG -t $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:latest .
-          docker push -a $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG
+          docker push -a $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY
