@@ -7,4 +7,5 @@ RUN pip install -r requirement.txt
 
 COPY . .
 
+
 CMD [ "python", "-m", "flask", "run" ]
